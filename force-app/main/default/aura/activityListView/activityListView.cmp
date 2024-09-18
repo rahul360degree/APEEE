@@ -1,0 +1,25 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="ActivityListViewController" access="global" >
+    <aura:attribute name="isShowListView" type="Boolean" default="false"/>
+    <aura:attribute name="selectedValue" type="String"/>
+    <aura:attribute name="listViewOptions" type="List" />
+    <aura:attribute name="objectApiName" type="String" default="Activity__c" />
+    <aura:attribute name="listName" type="String" default="All" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="cmb-style slds-col slds-size_5-of-12">
+        <lightning:combobox label="Select List View" value="{!v.selectedValue}" onchange="{!c.handleChange}" options="{!v.listViewOptions}" />
+    </div>
+    
+    <div class="custom-list-view slds-m-top_medium">
+        <aura:if isTrue="{!v.isShowListView}">
+        	<lightning:listView objectApiName="{!v.objectApiName}" 
+                            listName="{!v.listName}"
+                            rows="10"
+                            showSearchBar="true"
+                            showActionBar="false"
+                            enableInlineEdit="false"
+                            showRowLevelActions="false"/>
+        </aura:if>
+    </div>
+</aura:component>

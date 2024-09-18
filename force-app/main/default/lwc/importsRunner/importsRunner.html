@@ -1,0 +1,109 @@
+<template>
+	<div class="slds-p-around_large minwidth">
+
+		<c-wizard header="Process Imports" variant="base" current-step={activeStep} next-label={nextLabel} onchange={handleStepChange}>
+			<c-wizard-step label="Configuration" name="step-1" before-change={validate}>
+					Configuration
+					<lightning-combobox
+								name="school"
+								label="School"
+								value={selectedSchool}
+								placeholder="Select School"
+								options={schools}
+								onchange={handleSchoolChange} 
+								required>
+					</lightning-combobox>
+					<lightning-combobox
+								name="schoolyear"
+								label="Schoolyear"
+								value={selectedSchoolyear}
+								placeholder="Select Schoolyear"
+								options={schoolyears}
+								onchange={handleSchoolyearChange} 
+								required>
+					</lightning-combobox>
+			</c-wizard-step>
+			<c-wizard-step hide-next-button={hideNextButton} hide-previous-button={hidePreviousButton} label="Classes" name="step-2">
+				<div>
+					<template if:true={selectedSchool}>Selected school : {selectedSchoolLabel}</template><BR />
+					<template if:true={selectedSchoolyear}>Selected year : {selectedSchoolyearLabel}</template>
+				</div>
+				<template if:true={currentJobStatus}> 
+					{currentJobStatus.status}
+					{currentJobStatus.name}
+					<lightning-progress-ring value={jobProgress} size="large" variant={jobProgressVariant}></lightning-progress-ring>
+				</template>
+				<template if:true={error}>
+					<div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+						<h2>{error}</h2>
+					</div>
+				</template>
+			</c-wizard-step>
+			<c-wizard-step hide-next-button={hideNextButton} hide-previous-button={hidePreviousButton} label="Students" name="step-3">
+				<div>
+					<template if:true={selectedSchool}>Selected school : {selectedSchoolLabel}</template><BR />
+					<template if:true={selectedSchoolyear}>Selected year : {selectedSchoolyearLabel}</template>
+				</div>
+				<template if:true={currentJobStatus}> 
+					{currentJobStatus.status}
+					{currentJobStatus.name}
+					<lightning-progress-ring value={jobProgress} size="large" variant={jobProgressVariant}></lightning-progress-ring>
+				</template>
+				<template if:true={error}>
+					<div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+						<h2>{error}</h2>
+					</div>
+				</template>
+			</c-wizard-step>
+			<c-wizard-step hide-next-button={hideNextButton} hide-previous-button={hidePreviousButton} label="Parents" name="step-4">
+				<div>
+					<template if:true={selectedSchool}>Selected school : {selectedSchoolLabel}</template><BR />
+					<template if:true={selectedSchoolyear}>Selected year : {selectedSchoolyearLabel}</template>
+				</div>
+				<template if:true={currentJobStatus}> 
+					{currentJobStatus.status}
+					{currentJobStatus.name}
+					<lightning-progress-ring value={jobProgress} size="large" variant={jobProgressVariant}></lightning-progress-ring>
+				</template>
+				<template if:true={error}>
+					<div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+						<h2>{error}</h2>
+					</div>
+				</template>
+			</c-wizard-step>
+			<c-wizard-step label="Summary" name="step-5">
+				<template if:true={summary}> 
+					
+					<lightning-tabset>
+						<lightning-tab label="Classes">
+								<div><strong>Nr of steps</strong> {classesJob.currentStep}</div>
+								<div><strong>Nr of errors</strong> {classesJob.numberOfErrors}</div>
+								<div><strong>Status</strong> {classesJob.status}</div>
+								<div><strong>Statusmessage</strong> {classesJob.statusMessage}</div>
+						</lightning-tab>
+						<lightning-tab label="Parents" title="Summary of batchjob importing parents">
+							<div><strong>Nr of steps</strong> {parentsJob.currentStep}</div>
+							<div><strong>Nr of errors</strong> {parentsJob.numberOfErrors}</div>
+							<div><strong>Status</strong> {parentsJob.status}</div>
+							<div><strong>Statusmessage</strong> {parentsJob.statusMessage}</div>
+						</lightning-tab>
+						<lightning-tab label="Students" title="Summary of batchjob importing parents">
+							<div><strong>Nr of steps</strong> {studentsJob.currentStep}</div>
+							<div><strong>Nr of errors</strong> {studentsJob.numberOfErrors}</div>
+							<div><strong>Status</strong> {studentsJob.status}</div>
+							<div><strong>Statusmessage</strong> {studentsJob.statusMessage}</div>
+						</lightning-tab>
+				</lightning-tabset>
+
+					Classes Job:{classesJobId}<br />
+					Parents Job:{parentsJobId}<br />
+					Students Job:{studentsJobId}<br />
+					<!-- <template for:each={summary} for:item="item" key={item.id}>
+						
+					</template> -->
+				</template>
+			</c-wizard-step>
+		</c-wizard>
+
+	</div>
+</template>

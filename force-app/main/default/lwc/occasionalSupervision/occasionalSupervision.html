@@ -1,0 +1,87 @@
+<template>
+    <lightning-button style="margin-left:25%" variant="brand" label="Occasional Supervision" title="Primary action" onclick={handleClick} class="slds-m-left_xx-large"></lightning-button>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            <div class="slds-modal__header">
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Occasional Supervision</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <template for:each={studentList} for:item="acr">
+                    <p key={acr.Id}>
+                        <input class="slds-m-top_small" type="radio" data-id={acr.Id}  value={acr.Contact.Name} name="default" onchange={handleRadioChange}/>
+                        <label class="slds-radio__label" for="radio-62">
+                          <span class="slds-radio_faux"></span>
+                          <span class="slds-form-element__label">{acr.Contact.Name}</span>
+                        </label>
+                    </p>
+                </template>
+            </div>
+            <div class="slds-modal__footer slds-modal__footer_directional">
+            <button class="slds-button slds-button_neutral" onclick={handleCancel}>Close</button>
+            <button class="slds-button slds-button_brand" onclick={handleNext}>Next</button>
+            </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <template if:true={showNextModal}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+            <div class="slds-modal__header">
+            <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Occasional Supervision</h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-small-size_10-of-12 slds-medium-size_4-of-12 slds-large-size_5-of-12 slds-m-left_x-large">
+                        <label class="slds-form-element__label">Name</label>
+                        <input type="text" value={occName} disabled="" class="slds-input" />
+                    </div>
+                    <div class="slds-col slds-small-size_10-of-12 slds-medium-size_4-of-12 slds-large-size_5-of-12 slds-m-left_x-large">
+                        <label class="slds-form-element__label">Date</label>
+                        <input type="date" onchange={handleDateChange} value={selectedDate} class="slds-input" />
+                        <div class="error-message" if:true={dateError}>{dateError}</div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap slds-m-top_large">
+                    <div class="slds-col slds-small-size_10-of-12 slds-medium-size_4-of-12 slds-large-size_5-of-12 slds-m-left_x-large">
+                        <lightning-combobox
+                            name="customObject"
+                            label="Code"
+                            value={selectedValue}
+                            options={codeOptions}
+                            onchange={handleSelectionChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-small-size_10-of-12 slds-medium-size_4-of-12 slds-large-size_5-of-12 slds-m-left_x-large">
+                        <label class="slds-form-element__label">Class</label>
+                        <input type="text" value={className} disabled="" class="slds-input" />
+                    </div>
+                </div>
+            </div>
+            <template if:true={showHiddenSection}>
+                <div class="slds-grid slds-wrap slds-modal__content">
+                    <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_2-of-12 slds-m-left_xx-large slds-m-bottom_medium">
+                        <label class="slds-form-element__label">Day of Week</label>
+                        <input type="text" value={dayOfWeek} disabled="" class="slds-input" />
+                    </div>
+                    <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_2-of-12">
+                        <label class="slds-form-element__label">Start Time</label>
+                        <input type="Time" value={startTimeToShow} disabled="" class="slds-input" />
+                    </div>
+                    <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_2-of-12">
+                        <label class="slds-form-element__label">End Time</label>
+                        <input type="Time" value={endTimeToShow} disabled="" class="slds-input" />
+                    </div>
+                </div>
+            </template>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={handleClose}>Close</button>
+                <button class="slds-button slds-button_neutral" onclick={handleBack}>Back</button>
+                <button class="slds-button slds-button_brand" onclick={handleSubmit}>Submit</button>
+            </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

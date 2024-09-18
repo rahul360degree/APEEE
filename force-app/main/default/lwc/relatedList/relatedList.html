@@ -1,0 +1,28 @@
+<template>
+    <lightning-card  variant="Narrow"  title={titleDS} icon-name="standard:folder" class="cardSpinner">
+        <div if:true={showSpinner}>
+            <lightning-spinner
+                alternative-text="Loading..." variant="brand">
+            </lightning-spinner>
+        </div>
+       
+            <template if:true={isdataExist} >
+                <div class="slds-var-p-around_small">
+                    <c-l-w-c-lookup-custom-datatable-type
+                    key-field="Id"
+                    data={data} 
+                    columns={columns} 
+                    onlookupchanged={lookupChanged} 
+                    onvalueselect={handleSelection}
+                    draft-values={draftValues} 
+                    oncellchange={handleCellChange}
+                    onsave={handleSave}
+                    oncancel={handleCancel}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column>
+                </c-l-w-c-lookup-custom-datatable-type>
+                </div>  
+            </template>
+       
+    </lightning-card>
+</template>

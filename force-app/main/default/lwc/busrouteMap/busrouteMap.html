@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title={cardTitle} icon-name="custom:custom106">
+        <template if:true={markers}>
+            <div class="slds-wrap test">
+                <lightning-map
+                    options={mapOptions}
+                    markers-title={listTitle}
+                    map-markers={markers}
+                    zoom-level={zoomLevel}
+                ></lightning-map>
+                <template if:true={error}>
+                    <c-error-panel
+                        friendly-message="Error retrieving map"
+                        errors={error}
+                    ></c-error-panel>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>

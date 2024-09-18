@@ -1,0 +1,16 @@
+<apex:page standardStylesheets="false">
+<apex:slds />    
+<apex:includeLightning />    
+    <div id="LightningComponentid" />    
+    <script>
+    $Lightning.use("c:ActivityApp", function() {
+        $Lightning.createComponent("c:activityListView",
+          {
+          },
+          "LightningComponentid",
+          function(cmp) {
+             console.log('LWC Componenet added in VF page');
+          });
+    });
+    </script>
+</apex:page>

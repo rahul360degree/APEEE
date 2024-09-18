@@ -1,0 +1,13 @@
+<template>
+    <lightning-card>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="6" padding="around-small"></lightning-layout-item>
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input type="search" label="Search Student" onchange={handleSearch}></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="slds-var-p-around_medium">
+            <c-custom-data-table hide-checkbox-column="true" show-row-number-column="true" key-field="id" data={studentListToShow} columns={columns}></c-custom-data-table>
+        </div>
+    </lightning-card>
+</template>

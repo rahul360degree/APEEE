@@ -1,0 +1,5 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="cssClasses" type="String" default="Hello"  />
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
+
+</aura:component>
